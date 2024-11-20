@@ -1,0 +1,5 @@
+Séparez les fonctions
+La gestion d'erreur
+Le parsing
+La résolution
+L'affichage
