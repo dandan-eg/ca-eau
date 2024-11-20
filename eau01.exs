@@ -7,4 +7,4 @@ defmodule Exercice do
   end
 end
 
-Exercice.two_digit_combination() 
+Exercice.two_digit_combination()

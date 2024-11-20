@@ -1,12 +1,4 @@
 defmodule Exercice do
-  def validate_args(args) do
-    if args == [] do
-      {:error, :empty}
-    else
-      {:ok, args}
-    end
-  end
-
   def reverse_list(list) do
     do_reverse(list, [])
   end
@@ -25,14 +17,12 @@ defmodule Exercice do
   end
 end
 
-System.argv()
-|> Exercice.validate_args()
-|> case do
-  {:ok, args} ->
+case System.argv() do
+  [] ->
+    IO.puts("Usage: elixir eau02.exs <arguments>...")
+
+  args ->
     args
     |> Exercice.reverse_list()
     |> Exercice.print_list()
-
-  {:error, :empty} ->
-    IO.puts("Usage: elixir eau02.exs arg1 arg2 [...]")
 end
