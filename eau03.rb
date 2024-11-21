@@ -4,20 +4,19 @@ def log_and_die(error)
   exit(1)
 end
 
-VALID_CHAR = %w[0 1 2 3 4 5 6 7 8 9]
+VALID_CHAR = %w[0 1 2 3 4 5 6 7 8 9].freeze
 def digit?(str)
   return false if str.empty?
 
-  start_index = if str[0] == '-'
-                  1
-                elsif str[0] == '+'
-                  1
-                else
-                  0
-                end
-
-  len = str.length - 1
-  (start_index..len).each do |index|
+  start = if str[0] == '-'
+            1
+          elsif str[0] == '+'
+            1
+          else
+            0
+          end
+  limit = str.length - 1
+  (start..limit).each do |index|
     return false unless VALID_CHAR.include? str[index]
   end
   true
