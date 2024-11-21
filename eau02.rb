@@ -1,4 +1,4 @@
-def log_error_and_die(error_message)
+def log_and_die(error_message)
   puts error_message
   exit(1)
 end
@@ -16,7 +16,7 @@ def reverse_array(arr)
 end
 
 # La gestion d'erreur
-log_error_and_die('Usage: ruby eau02.rb <word> ..') if ARGV.empty?
+log_and_die('Usage: ruby eau02.rb <word> ..') if ARGV.empty?
 
 # L'affichage
 puts reverse_array(ARGV)
