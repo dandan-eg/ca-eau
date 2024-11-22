@@ -15,8 +15,8 @@ bool is_lower_alpha(char c) {
 }
 
 char to_upper(char lower) {
-    lower -= 'a';
-    return lower + 'A';
+    char position_in_alphabet = lower -'a';
+    return 'A' + position_in_alphabet;
 }
 
 int main(int argc, char* argv[]) {
@@ -28,16 +28,16 @@ int main(int argc, char* argv[]) {
     char* source = argv[1];
     int length = len(source);
 
-    int i = 0;
-    while (i < length) {
-
-        source[i] = to_upper(source[i]);
-
-        i++;
-        while (!is_lower_alpha(source[i])) {
-            i++;
+    bool toggle_upper = true;
+    for(int i = 0; i < length; i++) {
+        if (is_lower_alpha(source[i])) {
+            if (toggle_upper) {
+                source[i] = to_upper(source[i]);
+                toggle_upper = false;
+            } else {
+                toggle_upper = true;
+            }
         }
-        i++;
     }
 
     printf("%s\n", source);
