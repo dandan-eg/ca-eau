@@ -3,21 +3,19 @@ defmodule Exercice do
   def validate_args(_args), do: :error
 
   def upper_two(binaries) do
-    binaries
-    |> do_upper_two([], true)
-    |> Enum.reverse()
+    do_upper_two(binaries, <<>>, true)
   end
 
   defp do_upper_two(<<byte, rest::bits>>, accumulator, upper?) when byte in ?a..?z do
     if upper? do
-      do_upper_two(rest, [byte - 32 | accumulator], false)
+      do_upper_two(rest, <<accumulator::binary, byte - 32>>, false)
     else
-      do_upper_two(rest, [byte | accumulator], true)
+      do_upper_two(rest, <<accumulator::binary, byte>>, true)
     end
   end
 
   defp do_upper_two(<<byte, rest::bits>>, accumulator, upper?) do
-    do_upper_two(rest, [byte | accumulator], upper?)
+    do_upper_two(rest, <<accumulator::binary, byte>>, upper?)
   end
 
   defp do_upper_two(<<>>, accumulator, _upper?), do: accumulator
