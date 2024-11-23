@@ -1,3 +1,4 @@
+# Majuscule une lettre sur deux
 defmodule Exercice do
   def validate_args([arg]), do: {:ok, arg}
   def validate_args(_args), do: :error
