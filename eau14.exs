@@ -22,10 +22,24 @@ defmodule Exercice do
       bubble_up(tail, head, compare_fn, [max_so_far | acc])
     end
   end
+
+  def compare_ascii(_a, <<>>), do: true
+  def compare_ascii(<<>>, _b), do: false
+
+  def compare_ascii(<<char::utf8, rest_a::binary>>, <<charb::utf8, rest_b::binary>>) do
+    cond do
+      char_a == char_b ->
+        compare_ascii(rest_a, rest_b)
+
+      char_a > char_b ->
+        true
+
+      char_a < char_b ->
+        false
+    end
+  end
 end
 
-[10, 1, 100, 10_000, 1000]
-|> Exercice.bsort(fn a, b ->
-  a > b
-end)
+["Alfred", "Momo", "Gilbert"]
+|> Exercice.bsort(&Exercice.compare_ascii/2)
 |> IO.inspect()
