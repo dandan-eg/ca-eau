@@ -40,6 +40,12 @@ defmodule Exercice do
   end
 end
 
-["Alfred", "Momo", "Gilbert"]
-|> Exercice.bsort(&Exercice.compare_ascii/2)
-|> IO.inspect()
+case System.argv() do
+  [] ->
+    IO.puts("usage elixir eau14.exs [args...]")
+
+  args ->
+    args
+    |> Exercice.bsort(&Exercice.compare_ascii/2)
+    |> IO.inspect()
+end
