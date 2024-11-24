@@ -1,3 +1,4 @@
+# tri a bulle
 defmodule Exercice do
   def bsort(list) do
     do_bsort(list, [])
@@ -11,7 +12,7 @@ defmodule Exercice do
   def do_bsort([], sorted), do: sorted
 
   defp bubble_up([], max_so_far, acc) do
-    {max_so_far, acc} |> IO.inspect()
+    {max_so_far, acc}
   end
 
   defp bubble_up([head | tail], max_so_far, acc) do
