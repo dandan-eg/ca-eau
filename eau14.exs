@@ -32,7 +32,7 @@ defmodule Exercice do
 
   def compare_ascii(<<char_a::utf8, _::binary>>, <<char_b::utf8, _::binary>>)
       when char_a < char_b,
-      do: true
+      do: false
 
   def compare_ascii(<<_::utf8, rest_a::binary>>, <<_::utf8, rest_b::binary>>) do
     compare_ascii(rest_a, rest_b)
