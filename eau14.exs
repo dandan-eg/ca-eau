@@ -4,12 +4,12 @@ defmodule Exercice do
     do_bsort(list, compare_fn, [])
   end
 
-  def do_bsort([head | tail], compare_fn, sorted) do
+  defp do_bsort([head | tail], compare_fn, sorted) do
     {max, remaining} = bubble_up(tail, head, compare_fn, [])
     do_bsort(remaining, compare_fn, [max | sorted])
   end
 
-  def do_bsort([], _compare_fn, sorted), do: sorted
+  defp do_bsort([], _compare_fn, sorted), do: sorted
 
   defp bubble_up([], max_so_far, _compare_fn, acc) do
     {max_so_far, acc}
