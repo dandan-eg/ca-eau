@@ -26,17 +26,16 @@ defmodule Exercice do
   def compare_ascii(_a, <<>>), do: true
   def compare_ascii(<<>>, _b), do: false
 
-  def compare_ascii(<<char_a::utf8, rest_a::binary>>, <<char_b::utf8, rest_b::binary>>) do
-    cond do
-      char_a == char_b ->
-        compare_ascii(rest_a, rest_b)
+  def compare_ascii(<<char_a::utf8, _::binary>>, <<char_b::utf8, _::binary>>)
+      when char_a > char_b,
+      do: true
 
-      char_a > char_b ->
-        true
+  def compare_ascii(<<char_a::utf8, _::binary>>, <<char_b::utf8, _::binary>>)
+      when char_a < char_b,
+      do: true
 
-      char_a < char_b ->
-        false
-    end
+  def compare_ascii(<<_::utf8, rest_a::binary>>, <<_::utf8, rest_b::binary>>) do
+    compare_ascii(rest_a, rest_b)
   end
 end
 
