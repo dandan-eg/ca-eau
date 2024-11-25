@@ -26,7 +26,7 @@ defmodule Exercice do
   def compare_ascii(_a, <<>>), do: true
   def compare_ascii(<<>>, _b), do: false
 
-  def compare_ascii(<<char::utf8, rest_a::binary>>, <<charb::utf8, rest_b::binary>>) do
+  def compare_ascii(<<char_a::utf8, rest_a::binary>>, <<char_b::utf8, rest_b::binary>>) do
     cond do
       char_a == char_b ->
         compare_ascii(rest_a, rest_b)
