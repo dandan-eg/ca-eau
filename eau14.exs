@@ -37,14 +37,18 @@ defmodule Exercice do
   def compare_ascii(<<_::utf8, rest_a::binary>>, <<_::utf8, rest_b::binary>>) do
     compare_ascii(rest_a, rest_b)
   end
+
+  def run do
+    case System.argv() do
+      [] ->
+        IO.puts("usage elixir eau14.exs [args...]")
+
+      args ->
+        args
+        |> Exercice.bsort(&Exercice.compare_ascii/2)
+        |> IO.inspect()
+    end
+  end
 end
 
-case System.argv() do
-  [] ->
-    IO.puts("usage elixir eau14.exs [args...]")
-
-  args ->
-    args
-    |> Exercice.bsort(&Exercice.compare_ascii/2)
-    |> IO.inspect()
-end
+Exercice.run()
