@@ -5,16 +5,18 @@ defmodule Exercice do
   def number_only?(<<>>), do: true
   def number_only?(<<char, _tail::binary>>) when char not in ?0..?9, do: false
   def number_only?(<<_number_char, tail::binary>>), do: number_only?(tail)
-end
 
-System.argv()
-|> Exercice.validate_args()
-|> case do
-  {:ok, arg} ->
-    arg
-    |> Exercice.number_only?()
-    |> IO.puts()
+  def run do
+    System.argv()
+    |> Exercice.validate_args()
+    |> case do
+      {:ok, arg} ->
+        arg
+        |> Exercice.number_only?()
+        |> IO.puts()
 
-  :error ->
-    IO.puts("usage: elixir eau08.exs")
+      :error ->
+        IO.puts("usage: elixir eau08.exs")
+    end
+  end
 end
