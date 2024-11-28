@@ -15,14 +15,18 @@ defmodule Exercice do
     IO.puts(head)
     print_list(tail)
   end
+
+  def run do
+    case System.argv() do
+      [] ->
+        IO.puts("Usage: elixir eau02.exs <arguments>...")
+
+      args ->
+        args
+        |> Exercice.reverse_list()
+        |> Exercice.print_list()
+    end
+  end
 end
 
-case System.argv() do
-  [] ->
-    IO.puts("Usage: elixir eau02.exs <arguments>...")
-
-  args ->
-    args
-    |> Exercice.reverse_list()
-    |> Exercice.print_list()
-end
+Exercice.run()
