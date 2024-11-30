@@ -28,19 +28,23 @@ defmodule Exercice do
       rem(num, i) != 0
     end)
   end
+
+  def run do
+    System.argv()
+    |> Exercice.validate_args()
+    |> case do
+      {:ok, number} ->
+        number
+        |> Exercice.find_next_prime()
+        |> IO.puts()
+
+      {:error, {:not_number, arg}} ->
+        IO.puts("'#{arg}' is not an number")
+
+      {:error, :bad_args} ->
+        IO.puts("usage: eau04.exs <number>")
+    end
+  end
 end
 
-System.argv()
-|> Exercice.validate_args()
-|> case do
-  {:ok, number} ->
-    number
-    |> Exercice.find_next_prime()
-    |> IO.puts()
-
-  {:error, {:not_number, arg}} ->
-    IO.puts("'#{arg}' is not an number")
-
-  {:error, :bad_args} ->
-    IO.puts("usage: eau04.exs <number>")
-end
+Exercice.run()

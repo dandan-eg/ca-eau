@@ -1,13 +1,7 @@
 # String dans string
 defmodule Exercice do
-  def validate_args([arg1, arg2]) do
-    if String.length(arg1) > String.length(arg2) do
-      {:ok, {arg1, arg2}}
-    else
-      {:ok, {arg2, arg1}}
-    end
-  end
-
+  def validate_args([arg1, arg2]) when byte_size(arg1) > byte_size(arg2), do: {:ok, {arg1, arg2}}
+  def validate_args([arg1, arg2]) when byte_size(arg1) <= byte_size(arg2), do: {:ok, {arg1, arg2}}
   def validate_args(_args), do: :error
 
   def substring(binary, _start, limit) when is_binary(binary) and limit > byte_size(binary),
@@ -40,19 +34,21 @@ defmodule Exercice do
       substring(a, start, limit) == b
     end)
   end
-end
 
-System.argv()
-|> Exercice.validate_args()
-|> case do
-  {:ok, {bigger, smaller}} ->
-    bigger
-    |> Exercice.contains?(smaller)
-    |> then(fn
-      true -> IO.puts("Oui '#{smaller}' est contenu dans '#{bigger}'")
-      false -> IO.puts("Non '#{smaller}' n'est pas contenu dans '#{bigger}'")
-    end)
+  def run do
+    System.argv()
+    |> Exercice.validate_args()
+    |> case do
+      {:ok, {bigger, smaller}} ->
+        bigger
+        |> Exercice.contains?(smaller)
+        |> then(fn
+          true -> IO.puts("Oui '#{smaller}' est contenu dans '#{bigger}'")
+          false -> IO.puts("Non '#{smaller}' n'est pas contenu dans '#{bigger}'")
+        end)
 
-  :error ->
-    IO.puts("usage: elixir eau05.exs <string1> <string2>")
+      :error ->
+        IO.puts("usage: elixir eau05.exs <string1> <string2>")
+    end
+  end
 end
