@@ -43,19 +43,21 @@ defmodule Exercice do
       numbers when is_list(numbers) -> {:ok, Enum.reverse(numbers)}
     end
   end
-end
 
-System.argv()
-|> Exercice.verify_args()
-|> case do
-  {:ok, numbers} ->
-    numbers
-    |> Exercice.bsort()
-    |> IO.inspect()
+  def run do
+    System.argv()
+    |> Exercice.verify_args()
+    |> case do
+      {:ok, numbers} ->
+        numbers
+        |> Exercice.bsort()
+        |> IO.inspect()
 
-  {:error, {:nan, arg}} ->
-    IO.puts("'#{arg}' is not a valid number")
+      {:error, {:nan, arg}} ->
+        IO.puts("'#{arg}' is not a valid number")
 
-  {:error, :bad_args} ->
-    IO.puts("usage: elixir <numbers...> ")
+      {:error, :bad_args} ->
+        IO.puts("usage: elixir <numbers...> ")
+    end
+  end
 end
