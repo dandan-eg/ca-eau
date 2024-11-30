@@ -24,19 +24,23 @@ defmodule Exercice do
   def fib(n) do
     fib(n - 1) + fib(n - 2)
   end
+
+  def run do
+    System.argv()
+    |> Exercice.validate_args()
+    |> case do
+      {:ok, number} ->
+        number
+        |> Exercice.fib()
+        |> IO.puts()
+
+      {:error, :bad_args} ->
+        IO.puts("Usage: elixir eau03.exs <number>")
+
+      {:error, {:not_number, arg}} ->
+        IO.puts("\"#{arg}\" is not a valid number")
+    end
+  end
 end
 
-System.argv()
-|> Exercice.validate_args()
-|> case do
-  {:ok, number} ->
-    number
-    |> Exercice.fib()
-    |> IO.puts()
-
-  {:error, :bad_args} ->
-    IO.puts("Usage: elixir eau03.exs <number>")
-
-  {:error, {:not_number, arg}} ->
-    IO.puts("\"#{arg}\" is not a valid number")
-end
+Exercice.run()
