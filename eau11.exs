@@ -51,20 +51,23 @@ defmodule Exercice do
     new_min = min(diff, min_diff)
     find_min_with_tail(value, tail, new_min)
   end
+
+  def run do
+    System.argv()
+    |> Exercice.validate_args()
+    |> case do
+      {:ok, numbers} ->
+        numbers
+        |> Exercice.find_min_abs_diff()
+        |> IO.puts()
+
+      {:error, {:nan, arg}} ->
+        IO.puts("'#{arg}' is not a valid number")
+
+      {:error, :bad_args} ->
+        IO.puts("usage: elixir <num1> <num2>")
+    end
+  end
 end
 
-System.argv()
-|> Exercice.validate_args()
-|> case do
-  {:ok, numbers} ->
-    numbers
-    |> Exercice.find_min_abs_diff()
-    |> IO.puts()
-
-  {:error, {:nan, arg}} ->
-    IO.puts("'#{arg}' is not a valid number")
-
-  {:error, :bad_args} ->
-    IO.puts("usage: elixir <num1> <num2>")
-end
-
+Exercice.run()
