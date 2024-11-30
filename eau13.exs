@@ -13,14 +13,16 @@ defmodule Exercice do
   end
 
   defp find_min_index([head | tail]) do
+    min_index = {head, 0}
+
     tail
     |> Enum.with_index(1)
-    |> Enum.reduce({head, 0}, fn current = {current_value, _}, min = {min_value, _} ->
-      if current_value < min_value do
-        current
-      else
+    |> Enum.reduce(min_index, fn
+      {current_value, _}, {min_value, _} = min when current_value > min_value ->
         min
-      end
+
+      current, _min ->
+        current
     end)
     |> elem(1)
   end
